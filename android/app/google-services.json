@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "765106958471",
+    "project_id": "el-horizonte",
+    "storage_bucket": "el-horizonte.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765106958471:android:27184a6299d1cf39e10822",
+        "android_client_info": {
+          "package_name": "com.whiteck.el_horizonte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765106958471-b2igv427bnnm0nu20u8pr6492h27pu99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whiteck.el_horizonte",
+            "certificate_hash": "e61fd0134dab8be5a3d6a75851b0a7a04e6afc7c"
+          }
+        },
+        {
+          "client_id": "765106958471-q1lhn88ue4s0n551d232n0bfdsnnq631.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whiteck.el_horizonte",
+            "certificate_hash": "e1091ab947e711ec96eef2e0151837a16c0ae277"
+          }
+        },
+        {
+          "client_id": "765106958471-kct7v6c9da9v85uavp05arc27hf6asjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNnxBD-_tIVpkAzGB4OXGz4heyCD5ULPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765106958471-kct7v6c9da9v85uavp05arc27hf6asjt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "765106958471-jinqm7sfivst7vkc5gheodj0cohikam7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whiteck.el-horizonte"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

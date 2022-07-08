@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 class Config {
   final String appName = 'El Horizonte';
   final String splashIcon = 'assets/images/splash.png';
-  final String supportEmail = 'YOUR_EMAIL';
-  final String privacyPolicyUrl = 'https://www.mrb-lab.com/privacy-policy';
-  final String ourWebsiteUrl = 'https://www.mrb-lab.com';
+  final String supportEmail = 'mijael@whiteck.com';
+  final String privacyPolicyUrl =
+      'https://rc.elhorizonte.mx/html/aviso_privacidad.php';
+  final String ourWebsiteUrl = 'https://www.elhorizonte.mx/contacto';
   final String iOSAppId = '000000';
 
   //social links
-  static const String facebookPageUrl = 'https://www.facebook.com/mrblab24';
+  static const String facebookPageUrl = 'https://www.facebook.com/elhorizonte/';
   static const String youtubeChannelUrl =
-      'https://www.youtube.com/channel/UCnNr2eppWVVo-NpRIy1ra7A';
-  static const String twitterUrl = 'https://twitter.com/FlutterDev';
+      'https://www.youtube.com/channel/UChFywcHgTkvygGIY71XfDKA';
+  static const String twitterUrl = 'https://twitter.com/elhorizontemx';
 
   //app theme color
   final Color appColor = Color.fromARGB(255, 213, 7, 7);

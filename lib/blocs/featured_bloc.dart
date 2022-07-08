@@ -31,7 +31,7 @@ class FeaturedBloc with ChangeNotifier {
       QuerySnapshot rawData;
       rawData = await firestore
           .collection('contents')
-          .orderBy('id', descending: true)
+          .orderBy('date', descending: true)
           .limit(3)
           .get();
 

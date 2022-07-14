@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Config {
   final String appName = 'El Horizonte';
-  final String splashIcon = 'assets/images/splash.png';
+  final String splashIcon = 'assets/images/splash.gif';
   final String supportEmail = 'mijael@whiteck.com';
   final String privacyPolicyUrl =
       'https://rc.elhorizonte.mx/html/aviso_privacidad.php';
@@ -25,6 +25,7 @@ class Config {
 
   //animation files
   final String doneAsset = 'assets/animation_files/done.json';
+  final String splashAsset = 'assets/animation_files/splash.json';
 
   //Language Setup
   final List<String> languages = ['Spanish', 'English'];

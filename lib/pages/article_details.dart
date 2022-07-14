@@ -16,7 +16,6 @@ import 'package:el_horizonte/widgets/banner_ad_admob.dart'; //admob
 import 'package:el_horizonte/widgets/bookmark_icon.dart';
 import 'package:el_horizonte/widgets/html_body.dart';
 import 'package:el_horizonte/widgets/love_count.dart';
-import 'package:el_horizonte/widgets/love_icon.dart';
 import 'package:el_horizonte/widgets/related_articles.dart';
 import 'package:el_horizonte/widgets/views_count.dart';
 import 'package:share/share.dart';

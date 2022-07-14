@@ -15,6 +15,7 @@ class Article {
   String? timestamp;
   int? views;
   String? id;
+  String? video;
   String? readingTime;
 
   Article(
@@ -31,6 +32,7 @@ class Article {
       this.timestamp,
       this.views,
       this.id,
+      this.video,
       this.readingTime});
 
   factory Article.fromFirestore(DocumentSnapshot snapshot) {
@@ -42,15 +44,16 @@ class Article {
         description: d['description'],
         thumbnailImagelUrl: d['image url'],
         youtubeVideoUrl: d['youtube url'],
-        videoID: d['content type'] == 'video'
-            ? AppService.getYoutubeVideoIdFromUrl(d['youtube url'])
-            : '',
+        //videoID: d['content type'] == 'video'
+        //    ? AppService.getYoutubeVideoIdFromUrl(d['video'])
+        //    : '',
         loves: d['loves'],
         sourceUrl: d['source'],
         date: d['date'],
         timestamp: d['timestamp'],
         views: d['views'] ?? null,
+        // video: d['video'],
         id: d['id']);
-    //readingTime: AppService.getReadingTime(d['description']));
+    // readingTime: AppService.getReadingTime(d['description']));
   }
 }

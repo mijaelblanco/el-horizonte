@@ -31,6 +31,8 @@ import 'package:flutter_azure_tts/src/tts/tts_params.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:typed_data';
 
+import '../widgets/love_icon.dart';
+
 class ArticleDetails extends StatefulWidget {
   final Article? data;
   final String? tag;
@@ -88,7 +90,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
     if (_guestUser == true) {
       openSignInDialog(context);
     } else {
-      context.read<BookmarkBloc>().onLoveIconClick(widget.data!.timestamp);
+      context.read<BookmarkBloc>().onLoveIconClick(widget.data!.id);
     }
   }
 
@@ -98,7 +100,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
     if (_guestUser == true) {
       openSignInDialog(context);
     } else {
-      context.read<BookmarkBloc>().onBookmarkIconClick(widget.data!.timestamp);
+      context.read<BookmarkBloc>().onBookmarkIconClick(widget.data!.id);
     }
   }
 
@@ -215,19 +217,19 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                               ),
                                             )),
                                         Spacer(),
-                                        //IconButton(
-                                        //    icon: BuildLoveIcon(
-                                        //        collectionName: 'contents',
-                                        //        uid: sb.uid,
-                                        //        timestamp: article.timestamp),
-                                        //    onPressed: () {
-                                        //      handleLoveClick();
-                                        //    }),
+                                        IconButton(
+                                            icon: BuildLoveIcon(
+                                                collectionName: 'contents',
+                                                uid: sb.uid,
+                                                id: article.id),
+                                            onPressed: () {
+                                              handleLoveClick();
+                                            }),
                                         IconButton(
                                             icon: BuildBookmarkIcon(
                                                 collectionName: 'contents',
                                                 uid: sb.uid,
-                                                timestamp: article.timestamp),
+                                                id: article.id),
                                             onPressed: () async {
                                               handleBookmarkClick();
                                             }),

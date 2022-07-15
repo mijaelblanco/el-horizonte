@@ -69,7 +69,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
     if (_guestUser == true) {
       openSignInDialog(context);
     } else {
-      context.read<BookmarkBloc>().onLoveIconClick(widget.data!.timestamp);
+      context.read<BookmarkBloc>().onLoveIconClick(widget.data!.id);
     }
   }
 
@@ -79,7 +79,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
     if (_guestUser == true) {
       openSignInDialog(context);
     } else {
-      context.read<BookmarkBloc>().onBookmarkIconClick(widget.data!.timestamp);
+      context.read<BookmarkBloc>().onBookmarkIconClick(widget.data!.id);
     }
   }
 
@@ -220,7 +220,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                           icon: BuildLoveIcon(
                                               collectionName: 'contents',
                                               uid: sb.uid,
-                                              timestamp: d.timestamp),
+                                              id: d.id),
                                           onPressed: () {
                                             handleLoveClick();
                                           }),
@@ -228,7 +228,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                           icon: BuildBookmarkIcon(
                                               collectionName: 'contents',
                                               uid: sb.uid,
-                                              timestamp: d.timestamp),
+                                              id: d.id),
                                           onPressed: () {
                                             handleBookmarkClick();
                                           }),

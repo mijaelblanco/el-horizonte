@@ -7,13 +7,13 @@ import 'package:provider/provider.dart';
 class BuildLoveIcon extends StatelessWidget {
   final String collectionName;
   final String? uid;
-  final String? timestamp;
+  final String? id;
 
   const BuildLoveIcon(
       {Key? key,
       required this.collectionName,
       required this.uid,
-      required this.timestamp})
+      required this.id})
       : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class BuildLoveIcon extends StatelessWidget {
         if (!snap.hasData) return LoveIcon().normal;
         List d = snap.data[_type];
 
-        if (d.contains(timestamp)) {
+        if (d.contains(id)) {
           return LoveIcon().bold;
         } else {
           return LoveIcon().normal;

@@ -56,51 +56,51 @@ class _ViewsCountState extends State<ViewsCount> {
 
     return Container(
       child: Row(
-        children: [
-          Icon(
-            Feather.eye,
-            color: Colors.grey,
-            size: 20,
+          //    children: [
+          //      Icon(
+          //        Feather.eye,
+          //        color: Colors.grey,
+          //        size: 20,
+          //      ),
+          //      SizedBox(
+          //        width: 3,
+          //     ),
+          //widget.article.views == null
+          //    ? Text(0.toString())
+          //    : StreamBuilder(
+          //        stream: FirebaseFirestore.instance
+          //            .collection(collectionName)
+          //            .doc(documentName)
+          //            .snapshots(),
+          // builder: (context, AsyncSnapshot snap) {
+          //   if (!snap.hasData)
+          //return Text(
+          //  0.toString(),
+          //  style: TextStyle(
+          //      fontSize: 15,
+          //      fontWeight: FontWeight.w600,
+          //      color: Colors.grey),
+          //);
+          //return Text(
+          //  snap.data['views'].toString(),
+          //  style: TextStyle(
+          //      fontSize: 15,
+          //      fontWeight: FontWeight.w600,
+          //      color: Colors.grey),
+          //);
+          //         },
+          //       ),
+          //SizedBox(
+          //  width: 3,
+          //),
+          //Text(
+          //  'views',
+          //  maxLines: 1,
+          //  style: TextStyle(
+          //      fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey),
+          //).tr()
+          // ],
           ),
-          SizedBox(
-            width: 3,
-          ),
-          widget.article.views == null
-              ? Text(0.toString())
-              : StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection(collectionName)
-                      .doc(documentName)
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot snap) {
-                    if (!snap.hasData)
-                      return Text(
-                        0.toString(),
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey),
-                      );
-                    return Text(
-                      snap.data['views'].toString(),
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey),
-                    );
-                  },
-                ),
-          SizedBox(
-            width: 3,
-          ),
-          Text(
-            'views',
-            maxLines: 1,
-            style: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey),
-          ).tr()
-        ],
-      ),
     );
   }
 }

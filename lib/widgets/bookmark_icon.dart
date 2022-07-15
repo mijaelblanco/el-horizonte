@@ -7,13 +7,13 @@ import 'package:provider/provider.dart';
 class BuildBookmarkIcon extends StatelessWidget {
   final String collectionName;
   final String? uid;
-  final String? timestamp;
+  final String? id;
 
   const BuildBookmarkIcon(
       {Key? key,
       required this.collectionName,
       required this.uid,
-      required this.timestamp})
+      required this.id})
       : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class BuildBookmarkIcon extends StatelessWidget {
         if (!snap.hasData) return BookmarkIcon().normal;
         List d = snap.data[_type];
 
-        if (d.contains(timestamp)) {
+        if (d.contains(id)) {
           return BookmarkIcon().bold;
         } else {
           return BookmarkIcon().normal;

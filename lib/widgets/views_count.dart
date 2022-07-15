@@ -25,7 +25,7 @@ class _ViewsCountState extends State<ViewsCount> {
   _viewsIncrement() async {
     final DocumentReference ref = FirebaseFirestore.instance
         .collection('contents')
-        .doc(widget.article.timestamp);
+        .doc(widget.article.id);
     Future.delayed(Duration(seconds: 2)).then((value) async {
       await getLatestCount().then((int latestCount) async {
         await ref.update({
@@ -40,7 +40,7 @@ class _ViewsCountState extends State<ViewsCount> {
       final String fieldName = 'views';
       final DocumentReference ref = FirebaseFirestore.instance
           .collection('contents')
-          .doc(widget.article.timestamp);
+          .doc(widget.article.id);
       DocumentSnapshot snap = await ref.get();
       int itemCount = snap[fieldName] ?? 0;
       return itemCount;
@@ -52,7 +52,7 @@ class _ViewsCountState extends State<ViewsCount> {
   @override
   Widget build(BuildContext context) {
     final String collectionName = 'contents';
-    final String documentName = widget.article.timestamp!;
+    final String documentName = widget.article.id!;
 
     return Container(
       child: Row(

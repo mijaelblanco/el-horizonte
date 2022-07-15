@@ -243,6 +243,9 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                     ),
                                     Row(
                                       children: <Widget>[
+                                        ViewsCount(
+                                          article: article,
+                                        ),
                                         Icon(CupertinoIcons.time_solid,
                                             size: 18, color: Colors.grey),
                                         SizedBox(width: 3),

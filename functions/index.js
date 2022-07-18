@@ -36,16 +36,16 @@ exports.checkHorizonte = functions.https.onRequest((req, res) => {
           const description = response.data[i].cuerpo;
           // const keywords = response.data[0].keywords;
           const imagenes = response.data[i].imagenes[0];
-          // let video = response.data[i].videos;
+          let video = response.data[i].videos;
 
-          // let type;
+          let type;
 
-          // if (video == "") {
-          //  type = "image";
-          //  video = "";
-          // } else {
-          //  type = "video";
-          // }
+          if (video == "") {
+            type = "image";
+            video = "";
+          } else {
+            type = "video";
+          }
           const userObject = {
             id: id,
             description: description,
@@ -54,12 +54,12 @@ exports.checkHorizonte = functions.https.onRequest((req, res) => {
             source: url,
             views: 0,
             loves: 0,
-            // ["content type"]: type,
-            ["content type"]: "image",
+            ["content type"]: type,
+            // ["content type"]: "image",
             timestamp: timestamp,
             category: category,
             date: fecha_publicacion,
-            // video: video,
+            video: video,
           };
 
           admin.firestore().collection("contents").doc(id).set(userObject);

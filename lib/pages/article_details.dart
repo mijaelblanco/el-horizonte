@@ -364,7 +364,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 )),
       leading: IconButton(
         icon:
-            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.black),
+            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.white),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -374,12 +374,12 @@ class _ArticleDetailsState extends State<ArticleDetails> {
             ? Container()
             : IconButton(
                 icon: const Icon(Feather.external_link,
-                    size: 22, color: Colors.black),
+                    size: 22, color: Colors.white),
                 onPressed: () => AppService()
                     .openLinkWithCustomTab(context, article.sourceUrl!),
               ),
         IconButton(
-          icon: const Icon(Icons.share, size: 22, color: Colors.black),
+          icon: const Icon(Icons.share, size: 22, color: Colors.white),
           onPressed: () {
             _handleShare();
           },

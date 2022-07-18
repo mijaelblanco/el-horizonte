@@ -4,6 +4,7 @@ import 'package:el_horizonte/models/article.dart';
 import 'package:el_horizonte/utils/cached_image.dart';
 import 'package:el_horizonte/utils/next_screen.dart';
 import 'package:el_horizonte/widgets/video_icon.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Card3 extends StatelessWidget {
   final Article d;
@@ -14,6 +15,8 @@ class Card3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var parsedDate = DateTime.parse(d.date!);
+    var finalDate = timeago.format(parsedDate, locale: 'es');
     return InkWell(
       child: Container(
           padding: EdgeInsets.all(15),
@@ -37,7 +40,7 @@ class Card3 extends StatelessWidget {
                         alignment: Alignment.center,
                         children: [
                           Container(
-                            height: 140,
+                            height: 100,
                             width: 140,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5.0),
@@ -93,15 +96,15 @@ class Card3 extends StatelessWidget {
                       height: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.only(
-                          left: 10, right: 10, top: 3, bottom: 3),
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.blueGrey[600]),
+                          borderRadius: BorderRadius.circular(3),
+                          color: Color.fromARGB(255, 51, 51, 51)),
                       child: Text(
-                        d.category!,
+                        " " + finalDate + "  |  " + d.category! + " ",
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
                       ),
@@ -109,37 +112,6 @@ class Card3 extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          CupertinoIcons.time,
-                          color: Theme.of(context).secondaryHeaderColor,
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 2,
-                        ),
-                        Text(
-                          d.date!,
-                          style: TextStyle(
-                              color: Theme.of(context).secondaryHeaderColor,
-                              fontSize: 13),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.favorite,
-                          color: Colors.grey,
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(d.loves.toString(),
-                            style: TextStyle(
-                                color: Theme.of(context).secondaryHeaderColor,
-                                fontSize: 13)),
-                      ],
-                    )
                   ],
                 ),
               )

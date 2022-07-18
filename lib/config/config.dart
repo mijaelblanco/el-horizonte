@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Config {
   final String appName = 'El Horizonte';
-  final String splashIcon = 'assets/images/splash.gif';
+  final String splashIcon = 'assets/images/splash.png';
   final String supportEmail = 'mijael@whiteck.com';
   final String privacyPolicyUrl =
       'https://rc.elhorizonte.mx/html/aviso_privacidad.php';
@@ -14,6 +14,8 @@ class Config {
   static const String youtubeChannelUrl =
       'https://www.youtube.com/channel/UChFywcHgTkvygGIY71XfDKA';
   static const String twitterUrl = 'https://twitter.com/elhorizontemx';
+  static const String instagramUrl = 'https://www.instagram.com/elhorizontemx/';
+  static const String tiktokUrl = 'https://www.tiktok.com/@elhorizontemx';
 
   //app theme color
   final Color appColor = Color.fromARGB(255, 213, 7, 7);

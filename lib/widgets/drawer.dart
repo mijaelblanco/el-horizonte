@@ -28,7 +28,9 @@ class DrawerMenu extends StatelessWidget {
       'contact us',
       'facebook page',
       'youtube channel',
-      'twitter'
+      'twitter',
+      'instagram',
+      'tiktok'
     ];
 
     final List icons = [
@@ -40,7 +42,9 @@ class DrawerMenu extends StatelessWidget {
       Feather.mail,
       Feather.facebook,
       Feather.youtube,
-      Feather.twitter
+      Feather.twitter,
+      Feather.instagram,
+      Icons.tiktok
     ];
 
     return Drawer(
@@ -116,6 +120,10 @@ class DrawerMenu extends StatelessWidget {
                             .openLink(context, Config.youtubeChannelUrl);
                       } else if (index == 7) {
                         AppService().openLink(context, Config.twitterUrl);
+                      }else if (index == 8) {
+                        AppService().openLink(context, Config.instagramUrl);
+                      }else if (index == 9) {
+                        AppService().openLink(context, Config.tiktokUrl);
                       }
                     },
                   );

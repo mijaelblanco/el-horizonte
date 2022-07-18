@@ -12,7 +12,7 @@ import 'package:el_horizonte/services/app_service.dart';
 import 'package:el_horizonte/utils/cached_image.dart';
 import 'package:el_horizonte/utils/sign_in_dialog.dart';
 import 'package:el_horizonte/widgets/banner_ad_admob.dart'; //admob
-//import 'package:el_horizonte/widgets/banner_ad_fb.dart';      //fb ad
+//import 'package:el_horizonte/widgets/banner_ad_fb.dart'; //fb ad
 import 'package:el_horizonte/widgets/bookmark_icon.dart';
 import 'package:el_horizonte/widgets/html_body.dart';
 import 'package:el_horizonte/widgets/love_count.dart';
@@ -364,7 +364,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 )),
       leading: IconButton(
         icon:
-            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.white),
+            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.black),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -374,12 +374,12 @@ class _ArticleDetailsState extends State<ArticleDetails> {
             ? Container()
             : IconButton(
                 icon: const Icon(Feather.external_link,
-                    size: 22, color: Colors.white),
+                    size: 22, color: Colors.black),
                 onPressed: () => AppService()
                     .openLinkWithCustomTab(context, article.sourceUrl!),
               ),
         IconButton(
-          icon: const Icon(Icons.share, size: 22, color: Colors.white),
+          icon: const Icon(Icons.share, size: 22, color: Colors.black),
           onPressed: () {
             _handleShare();
           },

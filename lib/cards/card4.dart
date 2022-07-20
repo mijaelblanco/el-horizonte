@@ -4,7 +4,10 @@ import 'package:el_horizonte/models/article.dart';
 import 'package:el_horizonte/utils/cached_image.dart';
 import 'package:el_horizonte/utils/next_screen.dart';
 import 'package:el_horizonte/widgets/video_icon.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../blocs/theme_bloc.dart';
 
 class Card4 extends StatelessWidget {
   final Article d;
@@ -14,6 +17,7 @@ class Card4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tb = context.watch<ThemeBloc>();
     var parsedDate = DateTime.parse(d.date!);
     var finalDate = timeago.format(parsedDate, locale: 'es');
     return InkWell(
@@ -78,13 +82,17 @@ class Card4 extends StatelessWidget {
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
-                              color: Color.fromARGB(255, 51, 51, 51)),
+                              color: tb.darkTheme == false
+                                  ? Color.fromARGB(255, 239, 239, 239)
+                                  : Color.fromARGB(255, 51, 51, 51)),
                           child: Text(
                             " " + finalDate + "  |  " + d.category! + " ",
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white),
+                                color: tb.darkTheme == false
+                                    ? Color.fromARGB(255, 70, 70, 70)
+                                    : Color.fromARGB(255, 255, 255, 255)),
                           ),
                         ),
                       ],

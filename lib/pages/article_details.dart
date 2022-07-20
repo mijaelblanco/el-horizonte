@@ -344,7 +344,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
               context.watch<AdsBloc>().bannerAdEnabled == false
                   ? Container()
                   : BannerAdAdmob() //admob
-              //: BannerAdFb()    //fb
+              //: BannerAdFb()      //fb
             ],
           ),
         ));

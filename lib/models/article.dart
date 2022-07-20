@@ -44,7 +44,7 @@ class Article {
         description: d['description'],
         thumbnailImagelUrl: d['image url'],
         youtubeVideoUrl: d['youtube url'],
-        //videoID: d['content type'] == 'video'
+        // videoID: d['content type'] == 'video',
         //    ? AppService.getYoutubeVideoIdFromUrl(d['video'])
         //    : '',
         loves: d['loves'],
@@ -52,7 +52,7 @@ class Article {
         date: d['date'],
         timestamp: d['timestamp'],
         views: d['views'] ?? null,
-        // video: d['video'],
+        video: d['video'],
         id: d['id']);
     // readingTime: AppService.getReadingTime(d['description']));
   }

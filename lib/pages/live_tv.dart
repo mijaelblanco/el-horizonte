@@ -18,7 +18,7 @@ class _LiveTVPageState extends State<LiveTVPage> {
   void initState() {
     super.initState();
     player.setDataSource("https://live.info7.mx/info7/stream.m3u8",
-        autoPlay: true);
+        autoPlay: false);
   }
 
   @override

@@ -5,7 +5,9 @@ import 'package:easy_localization/easy_localization.dart';
 class LoveCount extends StatelessWidget {
   final String collectionName;
   final String? timestamp;
-  const LoveCount({Key? key, required this.collectionName, required this.timestamp}) : super(key: key);
+  const LoveCount(
+      {Key? key, required this.collectionName, required this.timestamp})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

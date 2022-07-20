@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../blocs/theme_bloc.dart';
 
 class AppName extends StatelessWidget {
   final double fontSize;
@@ -6,6 +9,7 @@ class AppName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tb = context.watch<ThemeBloc>();
     return RichText(
       text: TextSpan(
         text: 'EL HORIZONTE', //first part
@@ -14,7 +18,9 @@ class AppName extends StatelessWidget {
             fontSize: 18,
             letterSpacing: -0.5,
             fontWeight: FontWeight.w900,
-            color: Colors.grey[800]),
+            color: tb.darkTheme == false
+                ? Colors.grey[800]
+                : Color.fromARGB(255, 234, 234, 234)),
       ),
     );
   }

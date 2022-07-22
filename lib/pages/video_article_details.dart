@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -24,6 +26,11 @@ import 'dart:io';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../utils/next_screen.dart';
+import 'package:flutter_azure_tts/flutter_azure_tts.dart';
+import 'package:flutter_azure_tts/src/audio/audio_output_format.dart';
+import 'package:flutter_azure_tts/src/tts/tts_params.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:just_audio/just_audio.dart';
 
 class VideoArticleDetails extends StatefulWidget {
   final Article? data;
@@ -33,17 +40,33 @@ class VideoArticleDetails extends StatefulWidget {
   _VideoArticleDetailsState createState() => _VideoArticleDetailsState();
 }
 
+class BufferAudioSource extends StreamAudioSource {
+  Uint8List _buffer;
+
+  BufferAudioSource(this._buffer) : super();
+
+  @override
+  Future<StreamAudioResponse> request([int? start, int? end]) {
+    start = start ?? 0;
+    end = end ?? _buffer.length;
+
+    return Future.value(
+      StreamAudioResponse(
+        sourceLength: _buffer.length,
+        contentLength: end - start,
+        offset: start,
+        contentType: 'audio/mpeg',
+        stream:
+            Stream.value(List<int>.from(_buffer.skip(start).take(end - start))),
+      ),
+    );
+  }
+}
+
 class _VideoArticleDetailsState extends State<VideoArticleDetails> {
   final FijkPlayer player = FijkPlayer();
   double rightPaddingValue = 130;
 
-  @override
-  void initState() {
-    super.initState();
-    final Article d = widget.data!;
-    //debugPrint(d.video!);
-    player.setDataSource(d.video!, autoPlay: true);
-  }
   // late YoutubePlayerController _controller;
 
   // initYoutube() async {
@@ -102,6 +125,26 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
     });
   }
 
+  late AudioPlayer audioplayer;
+  @override
+  void initState() {
+    super.initState();
+    final Article d = widget.data!;
+    //debugPrint(d.video!);
+    player.setDataSource(d.video!, autoPlay: false);
+    audioplayer = AudioPlayer();
+    AzureTts.init(
+        subscriptionKey: "243d954d0cb545b5a2ce1dd16c9429d0",
+        region: "eastus",
+        withLogs: true);
+    ttsAzure();
+    Future.delayed(Duration(milliseconds: 100)).then((value) {
+      setState(() {
+        rightPaddingValue = 10;
+      });
+    });
+  }
+
   // @override
   // void initState() {
   //  super.initState();
@@ -124,6 +167,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
   void dispose() {
     super.dispose();
     player.release();
+    audioplayer.dispose();
   }
 
   // @override
@@ -132,11 +176,50 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
   //  super.deactivate();
   // }
 
+  void ttsAzure() async {
+    final Article article = widget.data!;
+
+    final voicesResponse = await AzureTts.getAvailableVoices() as VoicesSuccess;
+
+    final voice = voicesResponse.voices
+        .where((element) =>
+            element.voiceType == "Neural" && element.locale.startsWith("es-MX"))
+        .toList(growable: true)[1];
+    // final text = article.description!;
+    final text = Bidi.stripHtmlIfNeeded(article.description!);
+    // print(text);
+
+    TtsParams params = TtsParams(
+        voice: voice,
+        audioFormat: AudioOutputFormat.audio16khz32kBitrateMonoMp3,
+        rate: 1.0,
+        text: text);
+    final ttsResponse = await AzureTts.getTts(params) as AudioSuccess;
+    // audioplayer.play();
+    // audioplayer.pause();
+
+    await audioplayer.setAudioSource(BufferAudioSource(ttsResponse.audio));
+  }
+
+  void _play(isSelected) {
+    debugPrint("play: " + isSelected.toString());
+    audioplayer.play();
+  }
+
+  void _pause(isSelected) {
+    debugPrint("pause: " + isSelected.toString());
+    audioplayer.pause();
+  }
+
   @override
   Widget build(BuildContext context) {
     final sb = context.watch<SignInBloc>();
     final Article d = widget.data!;
+    final Article article = widget.data!;
 
+    var parsedDate = DateTime.parse(article.date!);
+    var finalDate = timeago.format(parsedDate, locale: 'es');
+    bool isSelected = false;
     return Scaffold(
         body: SafeArea(
             bottom: false,
@@ -242,6 +325,22 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                       onPressed: () {
                                         handleBookmarkClick();
                                       }),
+                                  IconButton(
+                                      icon: Icon((isSelected == false)
+                                          ? Icons.volume_up
+                                          : Icons.pause),
+                                      onPressed: () async => {
+                                            if (isSelected == false)
+                                              {
+                                                isSelected = true,
+                                                _play(isSelected)
+                                              }
+                                            else
+                                              {
+                                                isSelected = false,
+                                                _pause(isSelected)
+                                              }
+                                          }),
                                 ],
                               ),
                               SizedBox(
@@ -249,25 +348,20 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Icon(Icons.date_range,
+                                  Icon(CupertinoIcons.time_solid,
                                       size: 20, color: Colors.grey),
                                   SizedBox(
                                     width: 5,
                                   ),
                                   Text(
-                                    d.date!,
+                                    finalDate,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .secondaryHeaderColor,
                                         fontSize: 12),
                                   ),
                                   SizedBox(
-                                    width: 20,
-                                  ),
-                                  Icon(CupertinoIcons.timer,
-                                      size: 18, color: Colors.grey),
-                                  SizedBox(
-                                    width: 5,
+                                    height: 5,
                                   ),
                                 ],
                               ),
@@ -313,7 +407,7 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                                 },
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,

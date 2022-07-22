@@ -110,6 +110,11 @@ class _ArticleDetailsState extends State<ArticleDetails> {
   void initState() {
     super.initState();
     player = AudioPlayer();
+    AzureTts.init(
+        subscriptionKey: "243d954d0cb545b5a2ce1dd16c9429d0",
+        region: "eastus",
+        withLogs: true);
+    ttsAzure();
     Future.delayed(Duration(milliseconds: 100)).then((value) {
       setState(() {
         rightPaddingValue = 10;
@@ -124,18 +129,13 @@ class _ArticleDetailsState extends State<ArticleDetails> {
   }
 
   void ttsAzure() async {
-    AzureTts.init(
-        subscriptionKey: "243d954d0cb545b5a2ce1dd16c9429d0",
-        region: "eastus",
-        withLogs: true);
-    print(AzureTts);
     final Article article = widget.data!;
 
     final voicesResponse = await AzureTts.getAvailableVoices() as VoicesSuccess;
 
     final voice = voicesResponse.voices
         .where((element) =>
-            element.voiceType == "Neural" && element.locale.startsWith("es-CO"))
+            element.voiceType == "Neural" && element.locale.startsWith("es-MX"))
         .toList(growable: true)[1];
     //final text = article.description!;
     final text = Bidi.stripHtmlIfNeeded(article.description!);
@@ -147,8 +147,17 @@ class _ArticleDetailsState extends State<ArticleDetails> {
         rate: 1.0,
         text: text);
     final ttsResponse = await AzureTts.getTts(params) as AudioSuccess;
-    player.play();
     await player.setAudioSource(BufferAudioSource(ttsResponse.audio));
+  }
+
+  void _play(isSelected) {
+    debugPrint("play: " + isSelected.toString());
+    player.play();
+  }
+
+  void _pause(isSelected) {
+    debugPrint("pause: " + isSelected.toString());
+    player.pause();
   }
 
   @override
@@ -158,6 +167,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
 
     var parsedDate = DateTime.parse(article.date!);
     var finalDate = timeago.format(parsedDate, locale: 'es');
+    bool isSelected = false;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -234,10 +244,21 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                                               handleBookmarkClick();
                                             }),
                                         IconButton(
-                                            icon: const Icon(Icons.volume_up),
-                                            onPressed: () async {
-                                              ttsAzure();
-                                            }),
+                                            icon: Icon((isSelected == false)
+                                                ? Icons.volume_up
+                                                : Icons.pause),
+                                            onPressed: () async => {
+                                                  if (isSelected == false)
+                                                    {
+                                                      isSelected = true,
+                                                      _play(isSelected)
+                                                    }
+                                                  else
+                                                    {
+                                                      isSelected = false,
+                                                      _pause(isSelected)
+                                                    }
+                                                }),
                                       ],
                                     ),
                                     SizedBox(
@@ -362,27 +383,49 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                   child: CustomCacheImage(
                       imageUrl: article.thumbnailImagelUrl, radius: 0.0),
                 )),
-      leading: IconButton(
-        icon:
-            const Icon(Icons.keyboard_backspace, size: 22, color: Colors.white),
-        onPressed: () {
-          Navigator.pop(context);
-        },
+      leading: Ink(
+        decoration: ShapeDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+          shape: CircleBorder(),
+        ),
+        child: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.black,
+          iconSize: 22,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       actions: <Widget>[
         article.sourceUrl == null
             ? Container()
-            : IconButton(
-                icon: const Icon(Feather.external_link,
-                    size: 22, color: Colors.white),
-                onPressed: () => AppService()
-                    .openLinkWithCustomTab(context, article.sourceUrl!),
+            : Ink(
+                decoration: ShapeDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.launch),
+                  color: Colors.black,
+                  iconSize: 22,
+                  onPressed: () => AppService()
+                      .openLinkWithCustomTab(context, article.sourceUrl!),
+                ),
               ),
-        IconButton(
-          icon: const Icon(Icons.share, size: 22, color: Colors.white),
-          onPressed: () {
-            _handleShare();
-          },
+        Ink(
+          decoration: ShapeDecoration(
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            icon: Icon(Icons.ios_share),
+            color: Colors.black,
+            iconSize: 22,
+            onPressed: () {
+              _handleShare();
+            },
+          ),
         ),
         SizedBox(
           width: 5,

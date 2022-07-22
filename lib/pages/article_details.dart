@@ -384,14 +384,14 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       imageUrl: article.thumbnailImagelUrl, radius: 0.0),
                 )),
       leading: Ink(
-        decoration: ShapeDecoration(
+        decoration: BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
-          shape: CircleBorder(),
+          shape: BoxShape.circle,
         ),
         child: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          iconSize: 22,
+          iconSize: 24,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -401,9 +401,11 @@ class _ArticleDetailsState extends State<ArticleDetails> {
         article.sourceUrl == null
             ? Container()
             : Ink(
-                decoration: ShapeDecoration(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
                   color: Color.fromARGB(255, 255, 255, 255),
-                  shape: CircleBorder(),
+                  shape: BoxShape.circle,
                 ),
                 child: IconButton(
                   icon: Icon(Icons.launch),
@@ -414,9 +416,11 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 ),
               ),
         Ink(
-          decoration: ShapeDecoration(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 255, 255),
-            shape: CircleBorder(),
+            shape: BoxShape.circle,
           ),
           child: IconButton(
             icon: Icon(Icons.ios_share),

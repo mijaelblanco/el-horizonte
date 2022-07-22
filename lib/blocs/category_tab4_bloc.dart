@@ -27,7 +27,7 @@ class CategoryTab4Bloc extends ChangeNotifier {
           .collection('contents')
           .where('category', isEqualTo: category)
           .orderBy('date', descending: true)
-          .limit(25)
+          .limit(10)
           .get();
     else
       rawData = await firestore
@@ -35,7 +35,7 @@ class CategoryTab4Bloc extends ChangeNotifier {
           .where('category', isEqualTo: category)
           .orderBy('date', descending: true)
           .startAfter([_lastVisible!['date']])
-          .limit(25)
+          .limit(10)
           .get();
 
     if (rawData.docs.length > 0) {

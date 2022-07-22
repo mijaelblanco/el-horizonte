@@ -242,29 +242,50 @@ class _VideoArticleDetailsState extends State<VideoArticleDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          IconButton(
-                            icon: Icon(Icons.keyboard_backspace,
-                                size: 22, color: Colors.white),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                          Ink(
+                            decoration: ShapeDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.arrow_back),
+                              color: Colors.black,
+                              iconSize: 22,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
                           ),
                           Spacer(),
                           d.sourceUrl == null
                               ? Container()
-                              : IconButton(
-                                  icon: Icon(Feather.external_link,
-                                      size: 22, color: Colors.white),
-                                  onPressed: () => AppService()
-                                      .openLinkWithCustomTab(
-                                          context, d.sourceUrl!),
+                              : Ink(
+                                  decoration: ShapeDecoration(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    shape: CircleBorder(),
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(Icons.launch),
+                                    color: Colors.black,
+                                    iconSize: 22,
+                                    onPressed: () => AppService()
+                                        .openLinkWithCustomTab(
+                                            context, d.sourceUrl!),
+                                  ),
                                 ),
-                          IconButton(
-                            icon: Icon(Icons.share,
-                                size: 22, color: Colors.white),
-                            onPressed: () {
-                              _handleShare();
-                            },
+                          Ink(
+                            decoration: ShapeDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              shape: CircleBorder(),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.ios_share),
+                              color: Colors.black,
+                              iconSize: 22,
+                              onPressed: () {
+                                _handleShare();
+                              },
+                            ),
                           ),
                         ],
                       ),
